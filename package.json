@@ -1,0 +1,49 @@
+{
+  "name": "project-battleship",
+  "version": "1.0.0",
+  "description": "creating web version of the battleship board game",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericchi00/Project-Battleship.git"
+  },
+  "author": "Eric Chi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericchi00/Project-Battleship/issues"
+  },
+  "homepage": "https://github.com/ericchi00/Project-Battleship#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.11.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "prettier": "2.6.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "jest": {
+    "modulePaths": [
+      "/shared/vendor/modules"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "shared"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  }
+}
