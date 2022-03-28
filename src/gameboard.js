@@ -1,32 +1,33 @@
 import Ship from "./ship";
 
 const Gameboard = () => {
-  const missed = [];
-  const ships = [
-    (carrier = new Ship(5)),
-    (battleship = new Ship(4)),
-    (destroyer = new Ship(3)),
-    (submarine = new Ship(3)),
-    (patrolBoat = new Ship(2)),
-  ];
+  let missed = [];
+  const carrier = new Ship(5);
+  const battleship = new Ship(4);
+  const destroyer = new Ship(3);
+  const submarine = new Ship(3);
+  const patrolboat = new Ship(2);
+  let ships = [carrier, battleship, destroyer, submarine, patrolboat];
 
   function placeShips(coords) {}
   function receiveAttack(coords) {
     // add ship class to dom
     if (coords === "ship") {
       // grab the id (type ofship)
-        // grab array num attribute and sets it to null
+      // grab array num attribute and sets it to null
     } else {
-        missed.push(coords);
+      missed.push(coords);
     }
   }
-    
-    function allSunk(shipsArr) {
-        let sunk = 0;
-        shipsArr.forEach(ship => {
-            if (ship.isSunk === true) sunk += 1;
-        });
-        if (sunk === 5) return true;
-        else return false;
+  function allSunk(shipsArr) {
+    let sunk = 0;
+    shipsArr.forEach((ship) => {
+      if (ship.isSunk === true) sunk += 1;
+    });
+    if (sunk === 5) return true;
+    else return false;
   }
+  return { ships, allSunk };
 };
+
+export default Gameboard;
