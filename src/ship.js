@@ -1,6 +1,7 @@
 // ship constructor
 class Ship {
-  constructor(length) {
+  constructor(name, length) {
+    this.name = name;
     this.length = length;
     this.sunk = false;
     this.size = Array.from({ length: length }, (value, num) => num);
