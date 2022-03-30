@@ -16,7 +16,7 @@ function createComputerBoard() {
   }
 }
 
-function addCoords() {
+function addCoordsToGrid() {
   const boxes = document.querySelectorAll(".box");
   const row = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   let num = 0;
@@ -32,4 +32,4 @@ function addCoords() {
   }
 }
 
-export { createComputerBoard, createPlayerBoard, addCoords };
+export { createComputerBoard, createPlayerBoard, addCoordsToGrid };
