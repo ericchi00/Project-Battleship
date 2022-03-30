@@ -1,4 +1,4 @@
-import Ship from "./ship";
+import Ship from "../src/ship";
 
 test("Dynamically create array based on input", () => {
   const newShip = new Ship(5);
