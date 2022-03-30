@@ -16,14 +16,23 @@ body {
     min-width: 100vw;
     background-color: #CED2CC;
     display: flex;
-    flex: 1;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 3rem;
+}
+
+.playerContainer, .computerContainer {
+    text-align: center;
 }
 
 .playerBoard, .computerBoard {
+    border: 2px solid black;
+    height: 400px;
+    width: 400px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.box {
     border: 1px solid black;
-    height: 40vh;
-    width: 40vw;
 }
