@@ -9,7 +9,9 @@ const Gameboard = () => {
   const patrolboat = new Ship(2);
   let ships = [carrier, battleship, destroyer, submarine, patrolboat];
 
-  function placeShips(coords) {}
+    function placeShips(coords) {
+      
+  }
   function receiveAttack(coords) {
     // add ship class to dom
     if (coords === "ship") {
@@ -27,6 +29,12 @@ const Gameboard = () => {
     if (sunk === 5) return true;
     else return false;
   }
+    
+    function displayMissed() {
+        missed.forEach(coord => {
+            // add missed class to DOM
+        })
+    }
   return { ships, allSunk };
 };
 
