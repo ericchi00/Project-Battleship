@@ -1,4 +1,3 @@
-import Ship from "./ship";
 import Gameboard from "./gameboard";
 
 test("testing allSunk function: 5 ships", () => {
