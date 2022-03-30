@@ -3,11 +3,11 @@ import Ship from "./ship";
 class Gameboard {
   constructor() {
     this.missed = [];
-    this.carrier = new Ship(5);
-    this.battleship = new Ship(4);
-    this.destroyer = new Ship(3);
-    this.submarine = new Ship(3);
-    this.patrolboat = new Ship(2);
+    this.carrier = new Ship("carrier", 5);
+    this.battleship = new Ship("battleship", 4);
+    this.destroyer = new Ship("destroyer", 3);
+    this.submarine = new Ship("submarine", 3);
+    this.patrolboat = new Ship("patrolboat", 2);
     this.ships = [
       this.carrier,
       this.battleship,
@@ -16,12 +16,30 @@ class Gameboard {
       this.patrolboat,
     ];
   }
-  placeShips(row, col, ship) {
-    if (document.querySelector(`[row="${row + ship.length}"]`) === null) return;
-    if (document.querySelector(`[col="${col + ship.length}"]`) === null) return;
-    else {
-      const firstBox = document.querySelector(`[row="${row}"][col="${col}"]`);
-      return firstBox;
+  // place ships in specified coordinates
+  placeShips(row, col, ship, axis) {
+    if (axis === "x") {
+      if (document.querySelector(`[row="${row + ship.length}"]`) === null)
+        return;
+      else {
+        for (let i = 0; i < ship.length; i++) {
+          document
+            .querySelector(`[row="${row}"][col="${col + i}"]`)
+            .setAttribute("ship", ship.name);
+        }
+      }
+    }
+    if (axis == "y") {
+      if (document.querySelector(`[col="${col + ship.length}"]`) === null)
+        return;
+      else {
+        for (let i = 0; i < ship.length; i++) {
+          document
+            .querySelector(`[row="${row + i}"][col="${col}"]`)
+            .setAttribute("ship", ship.name);
+        }
+      }
+    } else {
     }
   }
   receiveAttack(row, col) {
