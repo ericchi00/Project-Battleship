@@ -1,8 +1,12 @@
 import "./style.css";
 import Player from "./player";
-import { createComputerBoard, createPlayerBoard } from "./dom";
+import Gameboard from "./gameboard";
+import { addCoords, createComputerBoard, createPlayerBoard } from "./dom";
+
+const newGame = Gameboard();
 
 const gameLoop = (() => {
-    createComputerBoard();
-    createPlayerBoard();
+  createComputerBoard();
+  createPlayerBoard();
+  addCoords();
 })();
