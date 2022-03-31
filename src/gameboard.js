@@ -26,6 +26,9 @@ class Gameboard {
           document
             .querySelector(`[row="${row}"][col="${col + i}"]`)
             .setAttribute("ship", ship.name);
+          document
+            .querySelector(`[row="${row}"][col="${col + i}"]`)
+            .setAttribute("hitbox", i);
         }
       }
     }
@@ -37,18 +40,25 @@ class Gameboard {
           document
             .querySelector(`[row="${row + i}"][col="${col}"]`)
             .setAttribute("ship", ship.name);
+          document
+            .querySelector(`[row="${row + i}"][col="${col}"]`)
+            .setAttribute("hitbox", i);
         }
       }
-    } else {
     }
   }
   receiveAttack(row, col) {
-    // add ship class to dom
-    if (coords === "ship") {
-      // grab the id (type ofship)
-      // grab array num attribute and sets it to null
+    const box = document.querySelector(`[row="${row}"][col="${col}"]`);
+    if (box.hasAttribute("ship")) {
+      const shipName = box.getAttribute("ship");
+      const shipHitBox = box.getAttribute("hitbox");
+      this.ships.forEach((ship) => {
+        if (shipName === ship.name) {
+          ship.hit(shipHitBox);
+        }
+      });
     } else {
-      missed.push(coords);
+      this.missed.push([row, col]);
     }
   }
   allSunk(shipsArr) {
@@ -60,7 +70,7 @@ class Gameboard {
     else return false;
   }
   displayMissed() {
-    missed.forEach((coord) => {
+    this.missed.forEach((coord) => {
       // add missed class to DOM
     });
   }
