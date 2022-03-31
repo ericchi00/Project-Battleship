@@ -70,8 +70,11 @@ class Gameboard {
     else return false;
   }
   displayMissed() {
-    this.missed.forEach((coord) => {
+    this.missed.forEach((index) => {
       // add missed class to DOM
+      document
+        .querySelector(`[row="${index[0]}"][col="${index[1]}"]`)
+        .classList.add("missed");
     });
   }
 }
