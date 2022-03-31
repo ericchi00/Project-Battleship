@@ -41,7 +41,7 @@ test("Check if placeShips works in a valid area & ship size attribute is added",
 
 test("Check if placeShips function returns undefined when ship doesn't fit into Gameboard", () => {
   const newGame = new Gameboard("player");
-  expect(newGame.placeShips(9, 9, newGame.destroyer)).toBe(undefined);
+  expect(newGame.placeShips(9, 9, newGame.destroyer, 'x')).toBe(undefined);
 });
 
 test("Check if receiveAttack updates hit ship size array", () => {
@@ -80,7 +80,7 @@ test("Check if receiveAttack updates hit ship size array with multiple attacks a
 
 test("Check if displayMissed adds missed class to dom", () => {
   const newGame = new Gameboard("player");
-  document.body.innerHTML = '<div class="box" row="0" col="0"></div>';
+  document.body.innerHTML = '<div class="playerBoard"><div class="box" row="0" col="0"></div></div>';
   const container = document.querySelector(".box");
   newGame.receiveAttack(0, 0);
   newGame.displayMissed();
