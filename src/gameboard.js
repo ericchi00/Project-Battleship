@@ -1,7 +1,8 @@
 import Ship from "./ship";
 
 class Gameboard {
-  constructor() {
+  constructor(user) {
+    this.user = user;
     this.missed = [];
     this.carrier = new Ship("carrier", 5);
     this.battleship = new Ship("battleship", 4);
@@ -18,29 +19,28 @@ class Gameboard {
   }
   // place ships in specified coordinates
   placeShips(row, col, ship, axis) {
+    const board = document.querySelector(`.${this.user}Board`);
     if (axis === "x") {
-      if (document.querySelector(`[row="${row + ship.length}"]`) === null)
-        return;
+      if (board.querySelector(`[row="${row + ship.length}"]`) === null) return;
       else {
         for (let i = 0; i < ship.length; i++) {
-          document
+          board
             .querySelector(`[row="${row}"][col="${col + i}"]`)
             .setAttribute("ship", ship.name);
-          document
+          board
             .querySelector(`[row="${row}"][col="${col + i}"]`)
             .setAttribute("hitbox", i);
         }
       }
     }
-    if (axis == "y") {
-      if (document.querySelector(`[col="${col + ship.length}"]`) === null)
-        return;
+    if (axis === "y") {
+      if (board.querySelector(`[col="${col + ship.length}"]`) === null) return;
       else {
         for (let i = 0; i < ship.length; i++) {
-          document
+          board
             .querySelector(`[row="${row + i}"][col="${col}"]`)
             .setAttribute("ship", ship.name);
-          document
+          board
             .querySelector(`[row="${row + i}"][col="${col}"]`)
             .setAttribute("hitbox", i);
         }
@@ -48,13 +48,15 @@ class Gameboard {
     }
   }
   receiveAttack(row, col) {
-    const box = document.querySelector(`[row="${row}"][col="${col}"]`);
+    const board = document.querySelector(`.${this.user}Board`);
+    const box = board.querySelector(`[row="${row}"][col="${col}"]`);
     if (box.hasAttribute("ship")) {
       const shipName = box.getAttribute("ship");
       const shipHitBox = box.getAttribute("hitbox");
       this.ships.forEach((ship) => {
         if (shipName === ship.name) {
           ship.hit(shipHitBox);
+          box.classList.add("hit");
         }
       });
     } else {
@@ -70,9 +72,10 @@ class Gameboard {
     else return false;
   }
   displayMissed() {
+    const board = document.querySelector(`.${this.user}Board`);
     this.missed.forEach((index) => {
       // add missed class to DOM
-      document
+      board
         .querySelector(`[row="${index[0]}"][col="${index[1]}"]`)
         .classList.add("missed");
     });
