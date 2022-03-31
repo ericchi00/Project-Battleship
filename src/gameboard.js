@@ -17,36 +17,36 @@ class Gameboard {
       this.patrolboat,
     ];
   }
+
   // place ships in specified coordinates
   placeShips(row, col, ship, axis) {
     const board = document.querySelector(`.${this.user}Board`);
     if (axis === "x") {
       if (board.querySelector(`[row="${row + ship.length}"]`) === null) return;
-      else {
-        for (let i = 0; i < ship.length; i++) {
-          board
-            .querySelector(`[row="${row}"][col="${col + i}"]`)
-            .setAttribute("ship", ship.name);
-          board
-            .querySelector(`[row="${row}"][col="${col + i}"]`)
-            .setAttribute("hitbox", i);
-        }
+
+      for (let i = 0; i < ship.length; i += 1) {
+        board
+          .querySelector(`[row="${row}"][col="${col + i}"]`)
+          .setAttribute("ship", ship.name);
+        board
+          .querySelector(`[row="${row}"][col="${col + i}"]`)
+          .setAttribute("hitbox", i);
       }
     }
     if (axis === "y") {
       if (board.querySelector(`[col="${col + ship.length}"]`) === null) return;
-      else {
-        for (let i = 0; i < ship.length; i++) {
-          board
-            .querySelector(`[row="${row + i}"][col="${col}"]`)
-            .setAttribute("ship", ship.name);
-          board
-            .querySelector(`[row="${row + i}"][col="${col}"]`)
-            .setAttribute("hitbox", i);
-        }
+
+      for (let i = 0; i < ship.length; i += 1) {
+        board
+          .querySelector(`[row="${row + i}"][col="${col}"]`)
+          .setAttribute("ship", ship.name);
+        board
+          .querySelector(`[row="${row + i}"][col="${col}"]`)
+          .setAttribute("hitbox", i);
       }
     }
   }
+
   receiveAttack(row, col) {
     const board = document.querySelector(`.${this.user}Board`);
     const box = board.querySelector(`[row="${row}"][col="${col}"]`);
@@ -63,14 +63,16 @@ class Gameboard {
       this.missed.push([row, col]);
     }
   }
-  allSunk(shipsArr) {
+
+  allSunk() {
     let sunk = 0;
-    shipsArr.forEach((ship) => {
+    this.ships.forEach((ship) => {
       if (ship.isSunk === true) sunk += 1;
     });
     if (sunk === 5) return true;
-    else return false;
+    return false;
   }
+
   displayMissed() {
     const board = document.querySelector(`.${this.user}Board`);
     this.missed.forEach((index) => {
