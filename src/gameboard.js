@@ -18,12 +18,24 @@ class Gameboard {
     ];
   }
 
-  // place ships in specified coordinates
+  // place ships in specified coordinates, have to use -1 from ship length as grid starts counting from 0
   placeShips(row, col, ship, axis) {
     const board = document.querySelector(`.${this.user}Board`);
+    if (
+      board.querySelector(`[row="${row}"][col="${col}"]`).hasAttribute("ship")
+    )
+      return;
     if (axis === "x") {
-      if (board.querySelector(`[row="${row + ship.length}"]`) === null) return;
-
+      // checks if ship will be outside of grid
+      if (board.querySelector(`[col="${col + ship.length - 1}"]`) === null)
+        return;
+      // checks if ship will be placed on top of another ship
+      if (
+        board
+          .querySelector(`[row="${row}"][col="${col + ship.length - 1}"]`)
+          .hasAttribute("ship")
+      )
+        return;
       for (let i = 0; i < ship.length; i += 1) {
         board
           .querySelector(`[row="${row}"][col="${col + i}"]`)
@@ -34,8 +46,16 @@ class Gameboard {
       }
     }
     if (axis === "y") {
-      if (board.querySelector(`[col="${col + ship.length}"]`) === null) return;
-
+      // checks if ship will be outside of grid
+      if (board.querySelector(`[row="${row + ship.length - 1}"]`) === null)
+        return;
+      // checks if ship will be placed on top of another ship
+      if (
+        board
+          .querySelector(`[row="${row + ship.length - 1}"][col="${col}"]`)
+          .hasAttribute("ship")
+      )
+        return;
       for (let i = 0; i < ship.length; i += 1) {
         board
           .querySelector(`[row="${row + i}"][col="${col}"]`)
