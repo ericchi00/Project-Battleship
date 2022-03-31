@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-import { createPlayerBoard } from "../src/dom";
 import Gameboard from "../src/gameboard";
 
 test("test allSunk function: 5 ships", () => {
