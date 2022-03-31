@@ -45,3 +45,15 @@ body {
 .box {
   border: 1px solid black;
 }
+
+.box[ship] {
+  background-color: rgb(54, 206, 40);
+}
+
+.box[ship]:hover {
+  cursor: not-allowed;
+}
+
+.box:hover {
+  cursor: pointer;
+}
