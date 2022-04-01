@@ -66,7 +66,7 @@ function addBattlesship() {
   });
 }
 
-// places carrier on board
+// starts function loop and adds & removes event listeners
 function addBoats() {
   board.addEventListener("click", function handler(e) {
     const row = Number(e.target.getAttribute("row"));
