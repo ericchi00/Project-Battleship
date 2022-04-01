@@ -24,18 +24,18 @@ class Gameboard {
     if (
       board.querySelector(`[row="${row}"][col="${col}"]`).hasAttribute("ship")
     )
-      return;
+      return false;
     if (axis === "x") {
       // checks if ship will be outside of grid
       if (board.querySelector(`[col="${col + ship.length - 1}"]`) === null)
-        return;
+        return false;
       // checks if ship will be placed on top of another ship
       if (
         board
           .querySelector(`[row="${row}"][col="${col + ship.length - 1}"]`)
           .hasAttribute("ship")
       )
-        return;
+        return false;
       for (let i = 0; i < ship.length; i += 1) {
         board
           .querySelector(`[row="${row}"][col="${col + i}"]`)
@@ -44,18 +44,19 @@ class Gameboard {
           .querySelector(`[row="${row}"][col="${col + i}"]`)
           .setAttribute("hitbox", i);
       }
+      return true;
     }
     if (axis === "y") {
       // checks if ship will be outside of grid
       if (board.querySelector(`[row="${row + ship.length - 1}"]`) === null)
-        return;
+        return false;
       // checks if ship will be placed on top of another ship
       if (
         board
           .querySelector(`[row="${row + ship.length - 1}"][col="${col}"]`)
           .hasAttribute("ship")
       )
-        return;
+        return false;
       for (let i = 0; i < ship.length; i += 1) {
         board
           .querySelector(`[row="${row + i}"][col="${col}"]`)
@@ -64,7 +65,9 @@ class Gameboard {
           .querySelector(`[row="${row + i}"][col="${col}"]`)
           .setAttribute("hitbox", i);
       }
+      return true;
     }
+    return false;
   }
 
   receiveAttack(row, col) {
