@@ -37,6 +37,24 @@ class Gameboard {
       )
         return false;
       for (let i = 0; i < ship.length; i += 1) {
+        if (board.querySelector(`[row="${row}"][col="${col + i}"]`) === null)
+          return false;
+        if (board.querySelector(`[row="${row + i}"][col="${col}"]`) === null)
+          return false;
+        if (
+          board
+            .querySelector(`[row="${row}"][col="${col + i}"]`)
+            .hasAttribute("ship")
+        )
+          return false;
+        if (
+          board
+            .querySelector(`[row="${row + i}"][col="${col}"]`)
+            .hasAttribute("ship")
+        )
+          return false;
+      }
+      for (let i = 0; i < ship.length; i += 1) {
         board
           .querySelector(`[row="${row}"][col="${col + i}"]`)
           .setAttribute("ship", ship.name);
@@ -57,6 +75,24 @@ class Gameboard {
           .hasAttribute("ship")
       )
         return false;
+      for (let i = 0; i < ship.length; i += 1) {
+        if (board.querySelector(`[row="${row}"][col="${col + i}"]`) === null)
+          return false;
+        if (board.querySelector(`[row="${row + i}"][col="${col}"]`) === null)
+          return false;
+        if (
+          board
+            .querySelector(`[row="${row}"][col="${col + i}"]`)
+            .hasAttribute("ship")
+        )
+          return false;
+        if (
+          board
+            .querySelector(`[row="${row + i}"][col="${col}"]`)
+            .hasAttribute("ship")
+        )
+          return false;
+      }
       for (let i = 0; i < ship.length; i += 1) {
         board
           .querySelector(`[row="${row + i}"][col="${col}"]`)
