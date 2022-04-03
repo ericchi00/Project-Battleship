@@ -17,7 +17,22 @@ function changeCursor() {
   }
 }
 
+let axis = "x";
+function rotateAxis() {
+  const button = document.querySelector("#axis");
+  button.addEventListener("click", () => {
+    if (axis === "x") {
+      button.textContent = "Rotate Axis to Y";
+      axis = "y";
+    } else if (axis === "y") {
+      button.textContent = "Rotate Axis to X";
+      axis = "x";
+    }
+  });
+}
+
 function addBoats() {
+  rotateAxis();
   const playerBoard = new Gameboard("player");
   const board = document.querySelector(".playerBoard");
   board.addEventListener("click", function listener(e) {
@@ -27,18 +42,18 @@ function addBoats() {
       if (containsShip(playerBoard.battleship)) {
         if (containsShip(playerBoard.destroyer)) {
           if (containsShip(playerBoard.submarine)) {
-            if (playerBoard.placeShips(row, col, playerBoard.patrolboat, "y")) {
+            if (playerBoard.placeShips(row, col, playerBoard.patrolboat, axis)) {
               board.removeEventListener("click", listener);
               changeCursor();
             }
           }
-          playerBoard.placeShips(row, col, playerBoard.submarine, "y");
+          playerBoard.placeShips(row, col, playerBoard.submarine, axis);
         }
-        playerBoard.placeShips(row, col, playerBoard.destroyer, "y");
+        playerBoard.placeShips(row, col, playerBoard.destroyer, axis);
       }
-      playerBoard.placeShips(row, col, playerBoard.battleship, "x");
+      playerBoard.placeShips(row, col, playerBoard.battleship, axis);
     }
-    playerBoard.placeShips(row, col, playerBoard.carrier, "y");
+    playerBoard.placeShips(row, col, playerBoard.carrier, axis);
   });
 }
 
