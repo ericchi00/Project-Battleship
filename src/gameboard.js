@@ -27,7 +27,11 @@ class Gameboard {
       return false;
     if (axis === "x") {
       // checks if ship will be outside of grid
-      if (board.querySelector(`[col="${col + ship.length - 1}"]`) === null)
+      if (
+        board.querySelector(
+          `[row="${row}"][col="${col + ship.length - 1}"]`
+        ) === null
+      )
         return false;
       // checks if ship will be placed on top of another ship
       if (
@@ -36,24 +40,18 @@ class Gameboard {
           .hasAttribute("ship")
       )
         return false;
+      // checks ship length on top of a boat that is placed on y axis
       for (let i = 0; i < ship.length; i += 1) {
-        if (board.querySelector(`[row="${row}"][col="${col + i}"]`) === null)
-          return false;
-        if (board.querySelector(`[row="${row + i}"][col="${col}"]`) === null)
-          return false;
-        if (
-          board
-            .querySelector(`[row="${row}"][col="${col + i}"]`)
-            .hasAttribute("ship")
-        )
-          return false;
-        if (
-          board
-            .querySelector(`[row="${row + i}"][col="${col}"]`)
-            .hasAttribute("ship")
-        )
-          return false;
+        if (board.querySelector(`[row="${row}"][col="${col + i}"]`) !== null) {
+          if (
+            board
+              .querySelector(`[row="${row}"][col="${col + i}"]`)
+              .hasAttribute("ship")
+          )
+            return false;
+        }
       }
+      // sets the ship onto div and returns true
       for (let i = 0; i < ship.length; i += 1) {
         board
           .querySelector(`[row="${row}"][col="${col + i}"]`)
@@ -75,24 +73,18 @@ class Gameboard {
           .hasAttribute("ship")
       )
         return false;
+      // checks ship length on top of a boat that is placed on the x axis
       for (let i = 0; i < ship.length; i += 1) {
-        if (board.querySelector(`[row="${row}"][col="${col + i}"]`) === null)
-          return false;
-        if (board.querySelector(`[row="${row + i}"][col="${col}"]`) === null)
-          return false;
-        if (
-          board
-            .querySelector(`[row="${row}"][col="${col + i}"]`)
-            .hasAttribute("ship")
-        )
-          return false;
-        if (
-          board
-            .querySelector(`[row="${row + i}"][col="${col}"]`)
-            .hasAttribute("ship")
-        )
-          return false;
+        if (board.querySelector(`[row="${row + i}"][col="${col}"]`) !== null) {
+          if (
+            board
+              .querySelector(`[row="${row + i}"][col="${col}"]`)
+              .hasAttribute("ship")
+          )
+            return false;
+        }
       }
+      // sets the ship onto the div and returns true
       for (let i = 0; i < ship.length; i += 1) {
         board
           .querySelector(`[row="${row + i}"][col="${col}"]`)
