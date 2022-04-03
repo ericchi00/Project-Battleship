@@ -5,20 +5,37 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+body {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background-color: #ced2cc;
+}
+
 header {
-  position: absolute;
   top: 0;
+  text-align: center;
   padding: 1rem;
   font-size: 2rem;
 }
 
-body {
-  min-height: 100vh;
-  min-width: 100vw;
-  background-color: #ced2cc;
+.instructions {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 9;
+  padding: 3rem;
+  background-color: aliceblue;
+}
+
+.boardWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 80%;
   gap: 3rem;
 }
 
@@ -46,14 +63,27 @@ body {
   border: 1px solid black;
 }
 
-.box[ship] {
+.playerBoard .box[ship] {
   background-color: rgb(54, 206, 40);
+}
+
+.playerBoard .box:hover {
+  cursor: pointer;
+}
+
+/* .noTouch means playerboard is completely set up  */
+.box.noTouch:hover {
+  cursor: not-allowed;
 }
 
 .box[ship]:hover {
   cursor: not-allowed;
 }
 
-.box:hover {
+.computerBoard .box:hover {
   cursor: pointer;
+}
+
+.computerBoard .box[ship] {
+  background-color: aliceblue;
 }
