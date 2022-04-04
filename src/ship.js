@@ -10,6 +10,7 @@ class Ship {
   // marks ship array to null to indicate it is hit
   hit(number) {
     this.size[number] = null;
+    this.isSunk();
   }
 
   // checks if the entire ship array is null, then it is sunk
@@ -20,8 +21,8 @@ class Ship {
         numOfHit += 1;
       }
     }
-    if (numOfHit === this.length) return true;
-    return false;
+    if (numOfHit === this.length) this.sunk = true;
+    else this.sunk = false;
   }
 }
 
