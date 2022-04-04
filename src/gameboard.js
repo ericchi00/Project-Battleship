@@ -19,6 +19,7 @@ class Gameboard {
   }
 
   // place ships in specified coordinates, have to use -1 from ship length as grid starts counting from 0
+  // returns false if you can't place it there, returns true if you can
   placeShips(row, col, ship, axis) {
     const board = document.querySelector(`.${this.user}Board`);
     if (
@@ -98,9 +99,12 @@ class Gameboard {
     return false;
   }
 
+  // returns false if not hit yet, returns true if hit already
   receiveAttack(row, col) {
     const board = document.querySelector(`.${this.user}Board`);
     const box = board.querySelector(`[row="${row}"][col="${col}"]`);
+    // check if box has already been hit
+    if (box.classList.contains("hit")) return false;
     if (box.hasAttribute("ship")) {
       const shipName = box.getAttribute("ship");
       const shipHitBox = box.getAttribute("hitbox");
@@ -108,11 +112,13 @@ class Gameboard {
         if (shipName === ship.name) {
           ship.hit(shipHitBox);
           box.classList.add("hit");
+          return true;
         }
       });
     }
     this.missed.push([row, col]);
     box.classList.add("hit");
+    return true;
   }
 
   allSunk() {
