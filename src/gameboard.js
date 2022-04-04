@@ -129,15 +129,5 @@ class Gameboard {
     if (sunk === 5) return true;
     return false;
   }
-
-  displayMissed() {
-    const board = document.querySelector(`.${this.user}Board`);
-    this.missed.forEach((index) => {
-      // add missed class to DOM
-      board
-        .querySelector(`[row="${index[0]}"][col="${index[1]}"]`)
-        .classList.add("missed");
-    });
-  }
 }
 export default Gameboard;
