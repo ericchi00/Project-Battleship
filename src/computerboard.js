@@ -1,5 +1,3 @@
-import Gameboard from "./gameboard";
-
 function getRandomInt() {
   return Math.floor(Math.random() * 10);
 }
@@ -8,11 +6,10 @@ function getRandomAxis() {
   return Math.floor(Math.random() * 2) === 0 ? "x" : "y";
 }
 
-function placeShipsRandomly() {
-  const computerBoard = new Gameboard("computer");
-  computerBoard.ships.forEach((ship) => {
+function placeShipsRandomly(computer) {
+  computer.board.ships.forEach((ship) => {
     while (
-      computerBoard.placeShips(
+      computer.board.placeShips(
         getRandomInt(),
         getRandomInt(),
         ship,
@@ -20,7 +17,7 @@ function placeShipsRandomly() {
       ) === false
     ) {
       if (
-        computerBoard.placeShips(
+        computer.board.placeShips(
           getRandomInt(),
           getRandomInt(),
           ship,
@@ -33,4 +30,4 @@ function placeShipsRandomly() {
   });
 }
 
-export default placeShipsRandomly;
+export { getRandomInt, placeShipsRandomly };
