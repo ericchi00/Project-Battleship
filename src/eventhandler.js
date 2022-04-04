@@ -7,10 +7,10 @@ function containsShip(ship) {
 }
 
 // once noTouch is added, cursor changes to normal on player.board
-function changeCursor() {
+function changeCursor(className) {
   const boxes = Array.from(document.querySelectorAll(".box"));
   for (let i = 0; i < boxes.length; i += 1) {
-    boxes[i].classList.add("setup");
+    boxes[i].classList.add(className);
   }
 }
 
@@ -31,6 +31,17 @@ function rotateAxis() {
   });
 }
 
+function reloadPage() {
+  const instructions = document.querySelector(".instructions");
+  const button = document.createElement("button");
+  button.classList.add("reload");
+  button.textContent = "Play Again";
+  button.addEventListener("click", () => {
+    reload = location.reload();
+  });
+  instructions.appendChild(button);
+}
+
 // lets player attack on Computer Board
 function takeTurns(player, computer) {
   const computerBoard = document.querySelector(".computerBoard");
@@ -39,31 +50,37 @@ function takeTurns(player, computer) {
   computerBoard.addEventListener("click", function listener(e) {
     const row = Number(e.target.getAttribute("row"));
     const col = Number(e.target.getAttribute("col"));
-    // check if player's ships are all sunk for computer win
-    if (player.board.allSunk()) {
+    // if receiveAttack returns false, it's already been hit
+    if (!computer.board.receiveAttack(row, col)) return;
+    // check if computer's ships are all sunk for player win
+    if (computer.board.allSunk()) {
       while (instructions.firstChild) {
         instructions.removeChild(instructions.lastChild);
       }
-      win.textContent = "Computer wins!";
+      instructions.style.visibility = "visible";
+      win.textContent = "You win!";
       instructions.appendChild(win);
       computerBoard.removeEventListener("click", listener);
+      changeCursor("gameover");
+      reloadPage();
       return;
     }
-    // if receiveAttack returns false, it's already been hit
-    if (!computer.board.receiveAttack(row, col)) return;
     // check if computer is attacking the same coords again
     let computerAttack = computer.randomAttack();
     while (!player.board.receiveAttack(computerAttack[0], computerAttack[1])) {
       // keeps rerolling computerAttack until it hits (true), then checks for win, if not it cancels the loop
       computerAttack = computer.randomAttack();
       // checks if computer wins
-      if (computer.board.allSunk()) {
+      if (player.board.allSunk()) {
         while (instructions.firstChild) {
           instructions.removeChild(instructions.lastChild);
         }
-        win.textContent = "You win!";
+        instructions.style.visibility = "visible";
+        win.textContent = "Computer wins!";
         instructions.appendChild(win);
         computerBoard.removeEventListener("click", listener);
+        changeCursor("gameover");
+        reloadPage();
         return;
       }
       if (player.board.receiveAttack(computerAttack[0], computerAttack[1])) {
@@ -75,6 +92,9 @@ function takeTurns(player, computer) {
 
 function addBoats(player, computer) {
   const board = document.querySelector(".playerBoard");
+  const placeShip = document.querySelector(".placeShip");
+  const instructions = document.querySelector(".instructions");
+  const spaces = document.querySelector(".spaces");
   board.addEventListener("click", function listener(e) {
     const row = Number(e.target.getAttribute("row"));
     const col = Number(e.target.getAttribute("col"));
@@ -82,22 +102,36 @@ function addBoats(player, computer) {
       if (containsShip(player.board.battleship)) {
         if (containsShip(player.board.destroyer)) {
           if (containsShip(player.board.submarine)) {
+            placeShip.textContent = "Place Patrolboat (2 boxes)";
+
             if (
               player.board.placeShips(row, col, player.board.patrolboat, axis)
             ) {
               // removes ability to add more boats, changes cursor, and lets you click on computer board
               board.removeEventListener("click", listener);
-              changeCursor();
+              changeCursor("setup");
               takeTurns(player, computer);
+              instructions.style.visibility = "hidden";
             }
           }
-          player.board.placeShips(row, col, player.board.submarine, axis);
+          if (player.board.placeShips(row, col, player.board.submarine, axis)) {
+            spaces.lastElementChild.remove();
+            placeShip.textContent = "Place Patrolboat (2 boxes)";
+          }
         }
-        player.board.placeShips(row, col, player.board.destroyer, axis);
+        if (player.board.placeShips(row, col, player.board.destroyer, axis)) {
+          placeShip.textContent = "Place Submarine (3 boxes)";
+        }
       }
-      player.board.placeShips(row, col, player.board.battleship, axis);
+      if (player.board.placeShips(row, col, player.board.battleship, axis)) {
+        spaces.lastElementChild.remove();
+        placeShip.textContent = "Place Destroyer (4 boxes)";
+      }
     }
-    player.board.placeShips(row, col, player.board.carrier, axis);
+    if (player.board.placeShips(row, col, player.board.carrier, axis)) {
+      spaces.lastElementChild.remove();
+      placeShip.textContent = "Place Battleship (4 boxes)";
+    }
   });
 }
 
