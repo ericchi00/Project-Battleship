@@ -7,9 +7,9 @@ import { Player } from "../src/player";
 test("test allSunk function: 5 ships", () => {
   const player = new Player("player");
   player.board.ships.forEach((ship) => {
-    ship.isSunk = true;
+    ship.sunk = true;
   });
-  expect(player.board.allSunk(player.board.ships)).toBe(true);
+  expect(player.board.allSunk()).toBe(true);
 });
 
 test("test allSunk function: 3 ships", () => {
