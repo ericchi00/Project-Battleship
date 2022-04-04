@@ -22,7 +22,9 @@ class Ship {
       }
     }
     if (numOfHit === this.length) this.sunk = true;
-    else this.sunk = false;
+    else {
+      this.sunk = false;
+    }
   }
 }
 
