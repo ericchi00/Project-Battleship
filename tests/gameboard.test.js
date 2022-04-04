@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import Player from "../src/player";
+import { Player } from "../src/player";
 
 test("test allSunk function: 5 ships", () => {
   const player = new Player("player");
@@ -85,7 +85,7 @@ test("Check if receiveAttack updates hit ship size array with multiple attacks a
   player.board.receiveAttack(0, 2);
   player.board.receiveAttack(0, 3);
   player.board.receiveAttack(0, 4);
-  expect(player.board.carrier.isSunk()).toBe(true);
+  expect(player.board.carrier.sunk).toBe(true);
 });
 
 test("Check if displayMissed adds missed class to dom", () => {

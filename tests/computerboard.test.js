@@ -1,8 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-import placeShipsRandomly from "../src/computerboard";
-import Player from "../src/player";
+import { placeShipsRandomly } from "../src/computerboard";
+import { Player } from "../src/player";
 
 test("Check if all ships are placed randomly and do not overlap", () => {
   document.body.innerHTML =

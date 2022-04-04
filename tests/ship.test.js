@@ -25,5 +25,5 @@ test("check sunk function", () => {
   const newShip = new Ship("test", 2);
   newShip.hit(0);
   newShip.hit(1);
-  expect(newShip.isSunk()).toBe(true);
+  expect(newShip.sunk).toBe(true);
 });
