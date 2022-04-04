@@ -110,15 +110,15 @@ class Gameboard {
           box.classList.add("hit");
         }
       });
-    } else {
-      this.missed.push([row, col]);
     }
+    this.missed.push([row, col]);
+    box.classList.add("hit");
   }
 
   allSunk() {
     let sunk = 0;
     this.ships.forEach((ship) => {
-      if (ship.isSunk === true) sunk += 1;
+      if (ship.sunk === true) sunk += 1;
     });
     if (sunk === 5) return true;
     return false;
