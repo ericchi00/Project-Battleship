@@ -1,16 +1,24 @@
-let playerTurn = true;
+/* eslint-disable max-classes-per-file */
 
-const Player = () => {
-  // after turn, set playerTurn to false
-};
+import { getRandomInt } from "./computerboard";
+import Gameboard from "./gameboard";
 
-const Computer = () => {
-  function computerTurn() {
-    if (playerTurn === true) return;
-    else {
-      // hit randomly
-    }
+class Player {
+  // creates new board when a new player is created
+  constructor(name) {
+    this.board = new Gameboard(name);
   }
-};
+}
 
-export { playerTurn, Player, Computer };
+function returnTwoRandomNumbers() {
+  return [getRandomInt(), getRandomInt()];
+}
+
+class Computer extends Player {
+  // eslint-disable-next-line class-methods-use-this
+  randomAttack() {
+    return returnTwoRandomNumbers();
+  }
+}
+
+export { Player, Computer };
