@@ -10,9 +10,14 @@ body {
   height: 100vh;
   width: 100vw;
   background-color: #ced2cc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 header {
+  position: fixed;
   top: 0;
   text-align: center;
   padding: 1rem;
@@ -20,22 +25,44 @@ header {
 }
 
 .instructions {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 9;
-  padding: 3rem;
-  background-color: aliceblue;
+  width: 50vw;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.123);
+  gap: 1rem;
+}
+
+.placeShip {
+  font-size: larger;
+}
+
+.spaces {
+  display: flex;
+  flex-direction: row;
+}
+
+.example {
+  width: 20px;
+  height: 20px;
+  border: 1px black solid;
+  background-color: rgb(54, 206, 40);
+}
+
+#axis {
+  width: 10rem;
+  font-size: 1rem;
+}
+
+.instructions p {
+  font-size: xx-large;
 }
 
 .boardWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80%;
   gap: 3rem;
 }
 
@@ -71,8 +98,8 @@ header {
   cursor: pointer;
 }
 
-/* .noTouch means playerboard is completely set up  */
-.box.noTouch:hover {
+/* .setup means playerboard is completely set up  */
+.box.setup:hover {
   cursor: not-allowed;
 }
 
@@ -80,10 +107,42 @@ header {
   cursor: not-allowed;
 }
 
-.computerBoard .box:hover {
+.computerBoard .box.setup:hover {
   cursor: pointer;
 }
 
-.computerBoard .box[ship] {
-  background-color: aliceblue;
+.computerBoard .box.setup.hit {
+  cursor: not-allowed;
+}
+
+.computerBoard .box.hit[ship] {
+  background-color: rgb(54, 206, 40);
+}
+
+.computerBoard .box.hit {
+  background-color: red;
+}
+
+.playerBoard .box.hit[ship] {
+  transition-delay: 150ms;
+  background-color: grey;
+}
+
+.playerBoard .hit {
+  transition-delay: 150ms;
+  background-color: red;
+}
+
+.computerBoard .box.setup.gameover:hover {
+  cursor: not-allowed;
+}
+
+.reload {
+  width: 125px;
+  height: 50px;
+  font-size: larger;
+}
+
+.color {
+  background-color: rgb(54, 206, 40);
 }
