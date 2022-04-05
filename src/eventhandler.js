@@ -224,7 +224,7 @@ function addBoats(player, computer) {
       if (player.board.placeShips(row, col, player.board.battleship, axis)) {
         spaces.lastElementChild.remove();
         placeShip.textContent =
-          "Place Destroyer (4 boxes) by clicking on player board.";
+          "Place Destroyer (3 boxes) by clicking on player board.";
       }
     }
     if (player.board.placeShips(row, col, player.board.carrier, axis)) {
