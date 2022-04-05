@@ -146,3 +146,55 @@ header {
 .color {
   background-color: rgb(54, 206, 40);
 }
+
+@media only screen and (max-width: 600px) {
+  header {
+    padding: .15rem;
+    font-size: 1.5re;
+  }
+
+  .instructions {
+    padding: .7rem;
+    gap: .25rem;
+  }
+
+  body {
+    height: 100vh;
+    width: 100vw;
+    background-color: #ced2cc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+  }
+
+  .placeShip {
+    font-size: medium;
+  }
+
+  .boardWrapper {
+    gap: .15rem;
+  }
+
+  header {
+    position: relative;
+    text-align: center;
+    padding: 1rem;
+    font-size: 2rem;
+  }
+
+  .boardWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .playerBoard,
+  .computerBoard {
+    border: 2px solid black;
+    height: 250px;
+    width: 250px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+  }
+}
