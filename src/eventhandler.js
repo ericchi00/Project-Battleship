@@ -200,33 +200,27 @@ function addBoats(player, computer) {
   board.addEventListener("click", function listener(e) {
     const row = Number(e.target.getAttribute("row"));
     const col = Number(e.target.getAttribute("col"));
-    if (containsShip(player.board.carrier)) {
-      if (containsShip(player.board.battleship)) {
-        if (containsShip(player.board.destroyer)) {
-          if (containsShip(player.board.submarine)) {
-            placeShip.textContent = "Place Patrolboat (2 boxes)";
 
-            if (
-              player.board.placeShips(row, col, player.board.patrolboat, axis)
-            ) {
-              // removes ability to add more boats, changes cursor, and lets you click on computer board
-              board.removeEventListener("click", listener);
-              changeCursor("setup");
-              takeTurns(player, computer);
-              instructions.style.visibility = "hidden";
-            }
-          }
-          if (player.board.placeShips(row, col, player.board.submarine, axis)) {
-            spaces.lastElementChild.remove();
-            placeShip.textContent =
-              "Place Patrolboat (2 boxes) by clicking on player board.";
-          }
-        }
-        if (player.board.placeShips(row, col, player.board.destroyer, axis)) {
-          placeShip.textContent =
-            "Place Submarine (3 boxes) by clicking on player board.";
-        }
+    if (containsShip(player.board.submarine)) {
+      if (player.board.placeShips(row, col, player.board.patrolboat, axis)) {
+        // removes ability to add more boats
+        board.removeEventListener("click", listener);
+        changeCursor("setup");
+        takeTurns(player, computer);
+        instructions.style.visibility = "hidden";
       }
+    } else if (containsShip(player.board.destroyer)) {
+      if (player.board.placeShips(row, col, player.board.submarine, axis)) {
+        spaces.lastElementChild.remove();
+        placeShip.textContent =
+          "Place Patrolboat (2 boxes) by clicking on player board.";
+      }
+    } else if (containsShip(player.board.battleship)) {
+      if (player.board.placeShips(row, col, player.board.destroyer, axis)) {
+        placeShip.textContent =
+          "Place Submarine (3 boxes) by clicking on player board.";
+      }
+    } else if (containsShip(player.board.carrier)) {
       if (player.board.placeShips(row, col, player.board.battleship, axis)) {
         spaces.lastElementChild.remove();
         placeShip.textContent =
