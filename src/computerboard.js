@@ -30,4 +30,5 @@ function placeShipsRandomly(computer) {
   });
 }
 
+
 export { getRandomInt, placeShipsRandomly };
